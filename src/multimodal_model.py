@@ -18,7 +18,7 @@ class MultimodalModel(nn.Module):
         self.image_proj = nn.Linear(self.image_model.num_features, config.HIDDEN_DIM)
 
         self.regressor = nn.Sequential(
-            nn.Linear(config.HIDDEN_DIM, config.HIDDEN_DIM // 2),
+            nn.Linear(config.HIDDEN_DIM + 1, config.HIDDEN_DIM // 2), # +1 из-за добавления поля mass
             nn.LayerNorm(config.HIDDEN_DIM // 2),
             nn.ReLU(),
             nn.Dropout(0.15),
