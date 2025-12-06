@@ -40,7 +40,7 @@ def train(config: Config,
                 'input_ids': batch['input_ids'].to(DEVICE),
                 'attention_mask': batch['attention_mask'].to(DEVICE),
                 'image': batch['image'].to(DEVICE),
-                # 'mass': batch['mass'].to(DEVICE),
+                'mass': batch['mass'].to(DEVICE),
             }
             labels = batch['calories'].to(DEVICE)
             

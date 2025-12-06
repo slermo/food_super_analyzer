@@ -17,7 +17,7 @@ def validate(model, val_loader, device):
                 'input_ids': batch['input_ids'].to(device),
                 'attention_mask': batch['attention_mask'].to(device),
                 'image': batch['image'].to(device),
-                # 'mass': batch['mass'].to(device),
+                'mass': batch['mass'].to(device),
             }
             targets = batch['calories'].to(device)
 

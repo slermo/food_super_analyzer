@@ -25,7 +25,7 @@ class MultimodalModel(nn.Module):
             nn.Linear(config.HIDDEN_DIM // 2, 1)  # выход — калории
         )
 
-    def forward(self, input_ids, attention_mask, image):
+    def forward(self, input_ids, attention_mask, image, mass):
         # текстовые эмбеддинги
         text_features = self.text_model(input_ids, attention_mask).last_hidden_state[:, 0, :]
         text_emb = self.text_proj(text_features)
@@ -36,7 +36,8 @@ class MultimodalModel(nn.Module):
 
         # Умножаем фичи
         fused_emb = text_emb * image_emb
-
+        
+        fused_emb = torch.cat([fused_emb, mass.unsqueeze(1)], dim=1)
         # Предсказание калорий
         calories_pred = self.regressor(fused_emb)
         return calories_pred.squeeze(1) 
