@@ -1,11 +1,9 @@
 from torch.utils.data import Dataset
-import os
 from PIL import Image
 import timm
 import albumentations as A
 import numpy as np
 import pandas as pd
-from torchvision.datasets import ImageFolder
 
 # Класс-обёртка для трансформаций
 class FoodDataset(Dataset):

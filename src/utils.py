@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from src.datasets.image_dataset import FoodDataset
+from src.datasets.dataset import FoodDataset
 from conf import Config
 import timm
 import torch
