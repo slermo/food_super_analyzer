@@ -57,7 +57,8 @@ def train(config: Config,
         
         # Валидация
         val_loss, val_mae = val.validate(model, val_loader, DEVICE)
-        print(f"Epoch {epoch+1}/{config.EPOCHS} | avg_Loss: {total_loss/len(train_loader):.4f} | Val Acc: {val_loss:.4f} | MAE: {val_mae:.4f}")
+        train_loss = total_loss / len(train_loader)
+        print(f"Epoch {epoch+1}/{config.EPOCHS} | avg_MSE: {train_loss:.2f} | Val MSE: {val_loss:.2f} | Val MAE: {val_mae:.2f}")
         
         # Сохранение лучшей модели
         if val_loss > best_loss:
