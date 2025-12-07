@@ -12,7 +12,7 @@ class Config:
     TEXT_LR = 3e-5
     IMAGE_LR = 1e-4
     REGRESSOR_LR = 5e-4
-    EPOCHS = 10
+    EPOCHS = 50
     DROPOUT = 0.3
     HIDDEN_DIM = 256
     NUM_CLASSES = 5

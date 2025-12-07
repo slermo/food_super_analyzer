@@ -29,7 +29,7 @@ def train(config: Config,
     criterion = nn.MSELoss()
     
     # Цикл обучения
-    best_loss = -float('inf')
+    best_loss = float('inf')
     for epoch in range(config.EPOCHS):
         model.train()
         total_loss = 0.0
@@ -61,9 +61,16 @@ def train(config: Config,
         print(f"Epoch {epoch+1}/{config.EPOCHS} | avg_MSE: {train_loss:.2f} | Val MSE: {val_loss:.2f} | Val MAE: {val_mae:.2f}")
         
         # Сохранение лучшей модели
-        if val_loss > best_loss:
+        if val_loss < best_loss:
             best_loss = val_loss
-            torch.save(model.state_dict(), config.SAVE_PATH)
+            torch.save({
+                "epoch": epoch,
+                "model_state": model.state_dict(),
+                "optim_state": optimizer.state_dict(),
+                "best_loss": best_loss
+            }, config.SAVE_PATH)
+        else:
+            print('Model wasnt updated')
 
 def set_requires_grad(module, 
                       unfreeze_pattern="", 
